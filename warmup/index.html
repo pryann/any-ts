@@ -54,7 +54,8 @@
 
       function renderTable(todos) {
         const rows = todos.map(createRow).join('')
-        document.querySelector('tbody').innerHTML = rows
+        const tbody = document.querySelector('tbody')
+        tbody.innerHTML = rows
       }
 
       function handleTodoStateChange(event) {

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true, // Lehetővé teszi, hogy a CommonJS modulokat (pl. module.exports) ES6 import szintaxissal importáld
+    "skipLibCheck": true, // Kihagyja a .d.ts fájlok (típusdefiníciók) ellenőrzését.
+    "forceConsistentCasingInFileNames": true, // Kényszeríti az azonos kis- és nagybetűhasználatot a fájlnevekben
+    "isolatedModules": true, // Minden TypeScript fájlt külön modulként kezel
+    "moduleDetection": "force", // Kényszeríti a TypeScriptet arra, hogy minden fájlt modulnak tekintsen, függetlenül attól, hogy van-e benne import vagy export utasítás.
+    "declaration": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
