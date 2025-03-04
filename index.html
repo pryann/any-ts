@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      table,
+      td,
+      th {
+        border: 1px solid #666;
+        border-collapse: collapse;
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>Done</td>
+          <td>Todo</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      const URL = 'https://jsonplaceholder.typicode.com/todos'
+      const completedColor = 'lightgreen'
+      const notCompletedColor = 'transparent'
+
+      async function fetchTodos() {
+        const todos = await fetch(URL)
+        return todos.json()
+      }
+
+      function getRowBackgroundColor(completed) {
+        return completed ? completedColor : notCompletedColor
+      }
+
+      function createRow(todo) {
+        const { id, title, completed } = todo
+        return `
+        <tr data-id="${id}" style="background-color: ${getRowBackgroundColor(completed)}">
+          <td>
+            <input type="checkbox" ${completed ? 'checked' : ''} data-id="${id}" />
+          </td>
+          <td>${title}</td>
+        </tr>`
+      }
+
+      function renderTable(todos) {
+        const rows = todos.map(createRow).join('')
+        document.querySelector('tbody').innerHTML = rows
+      }
+
+      function handleTodoStateChange(event) {
+        const checkbox = event.target
+        const row = document.querySelector(`tr[data-id="${checkbox.dataset.id}"]`)
+        row.style.backgroundColor = getRowBackgroundColor(checkbox.checked)
+      }
+
+      function attachTodoStatusChangeListener() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+        checkboxes.forEach((checkbox) => {
+          checkbox.addEventListener('change', handleTodoStateChange)
+        })
+      }
+
+      async function init() {
+        const todos = await fetchTodos()
+        renderTable(todos)
+        attachTodoStatusChangeListener()
+      }
+
+      init()
+    </script>
+  </body>
+</html>
