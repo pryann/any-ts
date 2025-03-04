@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx --watch ./src/main.ts",
+    "build": "tsc --project tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/pryann/any-ts#readme",
   "description": "",
   "dependencies": {
+    "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }
 }
