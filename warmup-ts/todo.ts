@@ -1,4 +1,4 @@
-interface Todo {
+type Todo = {
   userId: number
   id: number
   title: string
@@ -11,7 +11,8 @@ const notCompletedColor = 'transparent'
 
 async function fetchTodos(): Promise<Todo[]> {
   const response: Response = await fetch(url)
-  return response.json() as Promise<Todo[]>
+  const data = await response.json()
+  return data as Todo[]
 }
 
 function getRowBackgroundColor(completed: boolean): string {
